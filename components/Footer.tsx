@@ -7,12 +7,12 @@ export default function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-[1.4fr_1fr_1fr_1fr] lg:px-8">
         <div>
           <p className="font-display text-2xl font-semibold">
-            Marula <span className="text-gold">Bloom</span>
+            Marula <span className="text-sage">Bloom</span>
           </p>
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-cream/75">{BRAND.tagline}. A fictional brand created to demonstrate an online shop.</p>
         </div>
         <div>
-          <p className="text-sm font-bold text-gold">Shop</p>
+          <p className="text-sm font-bold text-sage">Shop</p>
           <ul className="mt-3 space-y-2 text-sm text-cream/80">
             {CATEGORIES.map((c) => (
               <li key={c.id}>
@@ -24,7 +24,7 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <p className="text-sm font-bold text-gold">Account</p>
+          <p className="text-sm font-bold text-sage">Account</p>
           <ul className="mt-3 space-y-2 text-sm text-cream/80">
             <li>
               <Link href="/account" className="hover:text-white">
@@ -49,7 +49,7 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <p className="text-sm font-bold text-gold">Want a shop like this?</p>
+          <p className="text-sm font-bold text-sage">Want a shop like this?</p>
           <p className="mt-3 text-sm leading-relaxed text-cream/80">Online shops with accounts, sales, payments and an owner dashboard.</p>
           <a href="https://www.mbttechsphere.co.za/#contact" className="btn-gold mt-4 !px-5 !py-2.5">
             Talk to MBT TechSphere

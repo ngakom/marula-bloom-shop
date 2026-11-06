@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import type { Product } from "@/lib/catalog";
 import { addToCart, onSale } from "@/lib/store";
+import { Check } from "./Icons";
 import Price from "./Price";
 
 export default function ProductCard({ product: p }: { product: Product }) {
@@ -13,7 +14,7 @@ export default function ProductCard({ product: p }: { product: Product }) {
   const soldOut = p.stock <= 0;
 
   return (
-    <div className="group flex flex-col">
+    <div className="lift group flex flex-col">
       <Link href={`/product/${p.slug}`} className="relative block aspect-square overflow-hidden rounded-2xl bg-sand">
         <Image src={p.image} alt={p.name} fill sizes="(min-width: 1024px) 22vw, 45vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
         <div className="absolute left-3 top-3 flex flex-col gap-1.5">
@@ -38,7 +39,13 @@ export default function ProductCard({ product: p }: { product: Product }) {
           }}
           className="btn-outline mt-3 !py-2.5"
         >
-          {soldOut ? "Sold out" : added ? "Added ✓" : "Add to cart"}
+          {soldOut ? "Sold out" : added ? (
+            <>
+              Added <Check />
+            </>
+          ) : (
+            "Add to cart"
+          )}
         </button>
       </div>
     </div>

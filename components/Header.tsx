@@ -29,7 +29,7 @@ export default function Header() {
       <div className="bg-forest px-4 py-2 text-center text-xs font-semibold text-cream sm:text-sm">
         Demo shop by <a href="https://www.mbttechsphere.co.za" className="underline underline-offset-2">MBT TechSphere Solutions</a> · no real
         payments ·{" "}
-        <Link href="/admin" className="text-gold underline underline-offset-2">
+        <Link href="/admin" className="text-sage underline underline-offset-2">
           try the owner dashboard
         </Link>
       </div>

@@ -44,7 +44,7 @@ export default function ProductPage() {
       </p>
 
       <div className="mt-6 grid gap-10 lg:grid-cols-2">
-        <div className="relative aspect-square overflow-hidden rounded-[2rem] bg-sand">
+        <div className="fade-up relative aspect-square overflow-hidden rounded-[2rem] bg-sand">
           <Image src={p.image} alt={p.name} fill priority sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" />
           {onSale(p) && <span className="absolute left-5 top-5 rounded-full bg-clay px-4 py-1.5 text-sm font-extrabold text-white">Sale!</span>}
         </div>
@@ -57,7 +57,7 @@ export default function ProductPage() {
 
           <p className="mt-6 text-lg leading-relaxed text-ink/85">{p.description}</p>
 
-          <p className={`mt-5 text-sm font-bold ${p.stock <= 0 ? "text-clay" : lowStock ? "text-gold" : "text-forest-soft"}`}>
+          <p className={`mt-5 text-sm font-bold ${p.stock <= 0 ? "text-clay" : lowStock ? "text-clay" : "text-forest-soft"}`}>
             {p.stock <= 0 ? "Sold out" : lowStock ? `Only ${p.stock} left in stock` : "In stock"}
           </p>
 
@@ -114,7 +114,7 @@ export default function ProductPage() {
       {related.length > 0 && (
         <section className="mt-20">
           <h2 className="font-display text-3xl font-semibold text-forest">You may also like</h2>
-          <div className="mt-6 grid grid-cols-2 gap-x-5 gap-y-10 lg:grid-cols-4">
+          <div data-reveal-group className="mt-6 grid grid-cols-2 gap-x-5 gap-y-10 lg:grid-cols-4">
             {related.map((r) => (
               <ProductCard key={r.id} product={r} />
             ))}

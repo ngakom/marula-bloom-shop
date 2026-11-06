@@ -137,7 +137,7 @@ function Overview() {
             {low.map((p) => (
               <li key={p.id} className="flex justify-between py-3">
                 <span className="font-semibold">{p.name}</span>
-                <span className={`font-bold ${p.stock === 0 ? "text-clay" : "text-gold"}`}>{p.stock === 0 ? "Sold out" : `${p.stock} left`}</span>
+                <span className={`font-bold ${p.stock === 0 ? "text-clay" : "text-forest-soft"}`}>{p.stock === 0 ? "Sold out" : `${p.stock} left`}</span>
               </li>
             ))}
           </ul>
@@ -210,7 +210,7 @@ function ProductRow({ product: p }: { product: Product }) {
           <input type="checkbox" name="featured" defaultChecked={!!p.featured} className="accent-[var(--forest)]" /> Featured
         </label>
         <button type="submit" className="btn-primary !px-4 !py-2">
-          {saved ? "Saved ✓" : "Save"}
+          {saved ? "Saved" : "Save"}
         </button>
         <button type="button" onClick={() => confirm(`Delete ${p.name}?`) && deleteProduct(p.id)} className="text-xs font-bold text-muted underline hover:text-clay">
           Delete

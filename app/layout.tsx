@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Fraunces, Manrope } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AddedToast from "@/components/AddedToast";
+import ScrollReveal from "@/components/ScrollReveal";
 import { BRAND } from "@/lib/catalog";
 import "./globals.css";
 
@@ -17,11 +19,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${manrope.variable} h-full`}>
+    // suppressHydrationWarning: the inline script adds the "js" class before React hydrates.
+    <html lang="en" className={`${fraunces.variable} ${manrope.variable} h-full`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body className="flex min-h-full flex-col antialiased">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <AddedToast />
+        <ScrollReveal />
       </body>
     </html>
   );

@@ -63,7 +63,7 @@ export default function CartPage() {
 
       <aside className="card h-fit p-7 lg:mt-20">
         <div>
-          <p className="text-sm font-bold text-forest">{toFree > 0 ? `Add ${rand(toFree)} more for free delivery` : "You've unlocked free delivery 🎉"}</p>
+          <p className="text-sm font-bold text-forest">{toFree > 0 ? `Add ${rand(toFree)} more for free delivery` : "You've unlocked free delivery!"}</p>
           <div className="mt-2 h-2 overflow-hidden rounded-full bg-sand">
             <div className="h-full rounded-full bg-gold transition-all duration-500" style={{ width: `${Math.min(100, (t.subtotal / BRAND.freeDeliveryFrom) * 100)}%` }} />
           </div>

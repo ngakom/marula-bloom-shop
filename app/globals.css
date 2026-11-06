@@ -1,17 +1,18 @@
 @import "tailwindcss";
 
+/* "Rose Luxe" palette: deep rose, blush pink, champagne, white and gold. Token names are kept from the first palette. */
 :root {
-  --forest: #1f3326;
-  --forest-soft: #2d4a37;
-  --sage: #8fa98a;
-  --gold: #d9a23a;
-  --gold-soft: #f3dfb1;
-  --clay: #c0603e;
-  --cream: #fbf7ef;
-  --sand: #f2ebdd;
-  --ink: #1d231f;
-  --muted: #5f6b62;
-  --line: #e5dccb;
+  --forest: #9c1f4d;
+  --forest-soft: #b8285a;
+  --sage: #f3b5c3;
+  --gold: #c9a24a;
+  --gold-soft: #fbe3ea;
+  --clay: #d6336c;
+  --cream: #fffafb;
+  --sand: #f6ece6;
+  --ink: #3b2530;
+  --muted: #7f6670;
+  --line: #f1dde3;
 }
 
 @theme inline {
@@ -51,7 +52,7 @@ body {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all disabled:cursor-not-allowed disabled:opacity-50 bg-forest text-cream hover:bg-forest-soft;
   }
   .btn-gold {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all disabled:cursor-not-allowed disabled:opacity-50 bg-gold text-forest hover:brightness-105;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all disabled:cursor-not-allowed disabled:opacity-50 bg-sage text-forest hover:bg-gold-soft;
   }
   .btn-outline {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all disabled:cursor-not-allowed disabled:opacity-50 border-2 border-forest text-forest hover:bg-forest hover:text-cream;
@@ -91,10 +92,98 @@ body {
   }
 }
 
+/* Hero entrance: children of .stagger fade up one after another. */
+.stagger > * {
+  animation: fade-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.stagger > :nth-child(2) { animation-delay: 0.12s; }
+.stagger > :nth-child(3) { animation-delay: 0.24s; }
+.stagger > :nth-child(4) { animation-delay: 0.36s; }
+
+/* Scroll reveal (ScrollReveal.tsx adds .in). Hidden only once JS marks <html class="js">. */
+.js [data-reveal],
+.js [data-reveal-group] > * {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0ms),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0ms),
+    translate 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.js [data-reveal].in,
+.js [data-reveal-group].in > * {
+  opacity: 1;
+  transform: none;
+}
+[data-reveal-group] > :nth-child(2) { --d: 70ms; }
+[data-reveal-group] > :nth-child(3) { --d: 140ms; }
+[data-reveal-group] > :nth-child(4) { --d: 210ms; }
+[data-reveal-group] > :nth-child(5) { --d: 280ms; }
+[data-reveal-group] > :nth-child(6) { --d: 350ms; }
+[data-reveal-group] > :nth-child(7) { --d: 420ms; }
+[data-reveal-group] > :nth-child(8) { --d: 490ms; }
+[data-reveal-group] > :nth-child(9) { --d: 560ms; }
+[data-reveal-group] > :nth-child(10) { --d: 630ms; }
+[data-reveal-group] > :nth-child(11) { --d: 700ms; }
+[data-reveal-group] > :nth-child(12) { --d: 770ms; }
+[data-reveal-group] > :nth-child(13) { --d: 840ms; }
+
+.ken-burns {
+  animation: ken-burns 16s cubic-bezier(0.2, 0.6, 0.3, 1) both;
+}
+@keyframes ken-burns {
+  from { transform: scale(1.12); }
+  to { transform: scale(1); }
+}
+
+.float {
+  animation: float 5s ease-in-out infinite;
+}
+@keyframes float {
+  50% { transform: translateY(-8px); }
+}
+
+/* Cards and buttons rise slightly on hover (uses `translate` so it never fights the reveal transform). */
+.lift {
+  transition: translate 0.3s ease, box-shadow 0.3s ease;
+}
+.lift:hover {
+  translate: 0 -5px;
+}
+.btn-primary,
+.btn-gold,
+.btn-outline {
+  transition-property: color, background-color, border-color, filter, translate;
+}
+.btn-primary:hover,
+.btn-gold:hover,
+.btn-outline:hover {
+  translate: 0 -2px;
+}
+
+.toast {
+  animation: toast 3.8s ease forwards;
+}
+@keyframes toast {
+  0% { opacity: 0; transform: translateY(24px); }
+  8%, 85% { opacity: 1; transform: none; }
+  100% { opacity: 0; transform: translateY(12px); visibility: hidden; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fade-up,
-  .pop {
+  .pop,
+  .stagger > *,
+  .ken-burns,
+  .float {
     animation: none;
+  }
+  .js [data-reveal],
+  .js [data-reveal-group] > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
   html {
     scroll-behavior: auto;

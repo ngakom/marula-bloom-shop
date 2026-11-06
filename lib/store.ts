@@ -16,6 +16,7 @@ export type ShopState = {
   session: string | null; // logged-in customer's email
   admin: boolean;
   cart: CartLine[];
+  lastAdded?: { productId: string; at: number } | null; // drives the "Added to cart" notice
   nextOrderNo: number;
 };
 
@@ -40,7 +41,7 @@ function load() {
   loaded = true;
   try {
     const saved = localStorage.getItem(KEY);
-    if (saved) state = { ...initial(), ...JSON.parse(saved) };
+    if (saved) state = { ...initial(), ...JSON.parse(saved), lastAdded: null };
   } catch {
     // Private mode or corrupt data: start fresh.
   }
@@ -49,7 +50,7 @@ function load() {
 function set(next: Partial<ShopState>) {
   state = { ...state, ...next };
   try {
-    localStorage.setItem(KEY, JSON.stringify(state));
+    localStorage.setItem(KEY, JSON.stringify({ ...state, lastAdded: null }));
   } catch {
     // Storage full or blocked: the demo keeps working for this visit.
   }
@@ -104,7 +105,10 @@ export function addToCart(productId: string, qty = 1) {
   const existing = state.cart.find((l) => l.productId === productId);
   const wanted = Math.min(p.stock, (existing?.qty ?? 0) + qty);
   if (wanted <= 0) return;
-  set({ cart: existing ? state.cart.map((l) => (l.productId === productId ? { ...l, qty: wanted } : l)) : [...state.cart, { productId, qty: wanted }] });
+  set({
+    cart: existing ? state.cart.map((l) => (l.productId === productId ? { ...l, qty: wanted } : l)) : [...state.cart, { productId, qty: wanted }],
+    lastAdded: { productId, at: Date.now() },
+  });
 }
 
 export function setQty(productId: string, qty: number) {
