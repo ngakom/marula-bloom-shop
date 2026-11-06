@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+:root {
+  --forest: #1f3326;
+  --forest-soft: #2d4a37;
+  --sage: #8fa98a;
+  --gold: #d9a23a;
+  --gold-soft: #f3dfb1;
+  --clay: #c0603e;
+  --cream: #fbf7ef;
+  --sand: #f2ebdd;
+  --ink: #1d231f;
+  --muted: #5f6b62;
+  --line: #e5dccb;
+}
+
+@theme inline {
+  --color-forest: var(--forest);
+  --color-forest-soft: var(--forest-soft);
+  --color-sage: var(--sage);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-clay: var(--clay);
+  --color-cream: var(--cream);
+  --color-sand: var(--sand);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-fraunces);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-manrope), system-ui, sans-serif;
+}
+
+@layer components {
+  .font-display {
+    font-family: var(--font-fraunces), Georgia, serif;
+  }
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.2em] text-clay;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all disabled:cursor-not-allowed disabled:opacity-50 bg-forest text-cream hover:bg-forest-soft;
+  }
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all disabled:cursor-not-allowed disabled:opacity-50 bg-gold text-forest hover:brightness-105;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all disabled:cursor-not-allowed disabled:opacity-50 border-2 border-forest text-forest hover:bg-forest hover:text-cream;
+  }
+  .field {
+    @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-[15px] outline-none transition-colors placeholder:text-muted/60 focus:border-forest;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-bold text-ink;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-white;
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Little "added to cart" pop on the cart badge. */
+.pop {
+  animation: pop 0.45s ease;
+}
+@keyframes pop {
+  40% {
+    transform: scale(1.35);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up,
+  .pop {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
